@@ -1,10 +1,1 @@
-{
-    "name": "Java Dev Container",
-    "image": "mcr.microsoft.com/vscode/devcontainers/java:17",
-    "features": {
-      "ghcr.io/devcontainers-contrib/features/java:1": {
-        "version": "17"
-      }
-    }
-  }
-  
+

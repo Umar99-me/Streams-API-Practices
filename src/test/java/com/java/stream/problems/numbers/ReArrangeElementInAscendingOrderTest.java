@@ -2,6 +2,8 @@ package com.java.stream.problems.numbers;
 
 import com.java.stream.solutions.GeneralProblemsNumbersSolution;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -24,6 +26,8 @@ public class ReArrangeElementInAscendingOrderTest {
     var expected = GeneralProblemsNumbersSolution.getSmallestPossibleValue(input);
     var actual = "";
 
+    actual = input.stream().map(String::valueOf).sorted().collect(Collectors.joining());
+    System.out.println(actual);
     Assertions.assertEquals(expected, actual);
   }
 }

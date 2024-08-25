@@ -2,6 +2,7 @@ package com.java.stream.problems.numbers;
 
 import com.java.stream.solutions.GeneralProblemsNumbersSolution;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Assertions;
@@ -20,8 +21,14 @@ public class IntegersOnlyTest {
         var input = List.of("1","12","12a","a12");
         var actual = List.of();
         var expected = GeneralProblemsNumbersSolution.getNumberOnly(input);
-        actual = actual.stream().filter(each -> each.chars()
-        .allMatch(Character::isDigit)).collect(Collectors.toList());
+        actual = input.stream().filter(each->{
+            try {
+                int x = Integer.parseInt(each);
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        }).collect(Collectors.toList());
         Assertions.assertEquals(expected, actual);
 
     }

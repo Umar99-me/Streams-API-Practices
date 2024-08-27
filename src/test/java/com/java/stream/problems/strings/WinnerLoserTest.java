@@ -1,5 +1,11 @@
 package com.java.stream.problems.strings;
 
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +23,18 @@ public class WinnerLoserTest {
     @Test
     @Disabled
       void testWinnerLoserTest(){
-
+        String s = "aabbccddefff";
+        // Map<String,Long> map
+         String ss= Arrays.stream(s.split(""))
+        .collect(Collectors.groupingBy(Function.identity(),LinkedHashMap::new,Collectors.counting()))
+        .entrySet()
+        .stream()
+        .sorted((x,y)->(x.getValue()>y.getValue())?1:-1)
+        .collect(Collectors.toMap(x->x.getValue(),x->x.getKey(),(x,y)->x+y)).toString()
+        // .entrySet()
+        // .filter(x->x.getValue()==1)
+        ;
+        System.out.println(ss);
       }
 
 }

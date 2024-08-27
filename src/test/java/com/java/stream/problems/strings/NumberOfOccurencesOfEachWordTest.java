@@ -3,6 +3,7 @@ package com.java.stream.problems.strings;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -27,7 +28,9 @@ public class NumberOfOccurencesOfEachWordTest {
 
         String actualOutput = "<PUT YOUR LOGIC HERE>";
         // Assert that the actual output matches the expected output
-        assertEquals(expectedOutput, actualOutput);
+        actualOutput = Arrays.stream(input.split(" "))
+        .collect(Collectors.groupingBy(Function.identity(),LinkedHashMap::new,Collectors.counting())).toString();
+        assertEquals(expectedOutput.toString(), actualOutput);
     }
 
     private void solution1() {

@@ -27,7 +27,7 @@ public class A_LambdaTest {
   @Test
   @Disabled
   public void a_predicate1() {
-    Predicate<String> pred = null; // TODO
+    Predicate<String> pred = ( x)->x.length()>4; // TODO
 
     Assertions.assertTrue(pred.test("abcde"));
     Assertions.assertFalse(pred.test("abcd"));
@@ -37,7 +37,7 @@ public class A_LambdaTest {
   @Test
   @Disabled
   public void a_predicate2() {
-    Predicate<String> pred = null; // TODO
+    Predicate<String> pred = x->x.length() == 0; // TODO
 
     Assertions.assertTrue(pred.test(""));
     Assertions.assertFalse(pred.test("a"));
@@ -50,9 +50,9 @@ public class A_LambdaTest {
    * <p>classname::methodname
    */
   @Test
-  @Disabled
+  // @Disabled
   public void a_predicate3() {
-    Predicate<String> pred = null; // TODO
+    Predicate<String> pred = String::isEmpty; // TODO
 
     Assertions.assertTrue(pred.test(""));
     Assertions.assertFalse(pred.test("a"));
@@ -68,12 +68,12 @@ public class A_LambdaTest {
 
   /** Create a predicate that returns true if both predicates startsWithJ and lengthIs7 hold. */
   @Test
-  @Disabled
+  // @Disabled
   public void a_predicate4() {
     Predicate<String> startsWithJ = s -> s.startsWith("J");
     Predicate<String> lengthIs7 = s -> s.length() == 7;
 
-    Predicate<String> startsWithJAndLengthIs7 = null; // TODO
+    Predicate<String> startsWithJAndLengthIs7 = startsWithJ.and(lengthIs7); // TODO
 
     Assertions.assertFalse(startsWithJAndLengthIs7.test("Hello"));
     Assertions.assertFalse(startsWithJAndLengthIs7.test("HelloJ1"));
@@ -91,13 +91,13 @@ public class A_LambdaTest {
    * string equals ERROR.
    */
   @Test
-  @Disabled
+  // @Disabled
   public void a_predicate5() {
     Predicate<String> lengthIs9 = s -> s.length() == 9;
     Predicate<String> equalsError = "ERROR"::equals;
     // Note: this could also be: Predicate.isEqual("ERROR")
 
-    Predicate<String> lengthIs9orError = null; // TODO
+    Predicate<String> lengthIs9orError = lengthIs9.or(equalsError); // TODO
 
     Assertions.assertFalse(lengthIs9orError.test("Hello"));
     Assertions.assertTrue(lengthIs9orError.test("Hello J1!"));
@@ -112,18 +112,18 @@ public class A_LambdaTest {
 
   /** Write a lambda expression that wraps the given string in parentheses. */
   @Test
-  @Disabled
+  // @Disabled
   public void b_function1() {
-    Function<String, String> func = null; // TODO
+    Function<String, String> func = x -> "("+x+")"; // TODO
 
     assertEquals("(abc)", func.apply("abc"));
   }
 
   /** Write a lambda expression that converts the given string to upper case. */
   @Test
-  @Disabled
+  // @Disabled
   public void b_function2() {
-    Function<String, String> func = null; // TODO
+    Function<String, String> func = String::toUpperCase; // TODO
 
     assertEquals("ABC", func.apply("abc"));
   }
@@ -132,7 +132,7 @@ public class A_LambdaTest {
   @Test
   @Disabled
   public void b_function3() {
-    Function<String, String> func = null; // TODO
+    Function<String, String> func = String::toUpperCase; // TODO
 
     assertEquals("ABC", func.apply("abc"));
   }
@@ -143,12 +143,12 @@ public class A_LambdaTest {
    * length.
    */
   @Test
-  @Disabled
+  // @Disabled
   public void b_function4() {
     Function<String, String> unNullify = s -> s == null ? "" : s;
     Function<String, Integer> length = String::length;
 
-    Function<String, Integer> lengthBis = null; // TODO
+    Function<String, Integer> lengthBis = unNullify.andThen(length); // TODO
 
     assertEquals((Integer) 14, lengthBis.apply("Hello JavaOne!"));
     assertEquals((Integer) 0, lengthBis.apply(""));
@@ -162,9 +162,9 @@ public class A_LambdaTest {
 
   /** Write a lambda expression that appends the string "abc" to the given StringBuilder. */
   @Test
-  @Disabled
+  // @Disabled
   public void c_consumer1() {
-    Consumer<StringBuilder> cons = null; // TODO
+    Consumer<StringBuilder> cons = x-> x.append("abc"); // TODO
 
     StringBuilder sb = new StringBuilder("xyz");
     cons.accept(sb);
@@ -173,9 +173,9 @@ public class A_LambdaTest {
 
   /** Write a lambda expression that clears the given list. */
   @Test
-  @Disabled
+  // @Disabled
   public void c_consumer2() {
-    Consumer<List<String>> cons = null; // TODO
+    Consumer<List<String>> cons = List::clear; // TODO
 
     List<String> list = new ArrayList<>(List.of("a", "b", "c"));
     cons.accept(list);
@@ -198,12 +198,12 @@ public class A_LambdaTest {
    * the second.
    */
   @Test
-  @Disabled
+  // @Disabled
   public void c_consumer4() {
     Consumer<List<String>> c1 = list -> list.add("first");
     Consumer<List<String>> c2 = list -> list.add("second");
 
-    Consumer<List<String>> consumer = null; // TODO
+    Consumer<List<String>> consumer = c1.andThen(c2); // TODO
 
     List<String> list = new ArrayList<>(List.of("a", "b", "c"));
     consumer.accept(list);
@@ -235,9 +235,9 @@ public class A_LambdaTest {
 
   /** Write a constructor reference that returns a new, empty StringBuilder. */
   @Test
-  @Disabled
+  // @Disabled
   public void d_supplier3() {
-    Supplier<StringBuilder> sup = null; // TODO
+    Supplier<StringBuilder> sup = StringBuilder::new; // TODO
 
     assertEquals("", sup.get().toString());
   }
@@ -247,9 +247,9 @@ public class A_LambdaTest {
    * first with the second, followed by the first again.
    */
   @Test
-  @Disabled
+  // @Disabled
   public void e_bifunction1() {
-    BiFunction<String, String, String> bifunc = null; // TODO
+    BiFunction<String, String, String> bifunc = (a,b)-> a+b+a; // TODO
 
     assertEquals("FirstSecondFirst", bifunc.apply("First", "Second"));
   }
@@ -259,9 +259,9 @@ public class A_LambdaTest {
    * within the first string, or -1 if the second string doesn't occur within the first string.
    */
   @Test
-  @Disabled
+  // @Disabled
   public void e_bifunction2() {
-    BiFunction<String, String, Integer> bifunc = null; // TODO
+    BiFunction<String, String, Integer> bifunc = String::indexOf; // TODO
 
     assertEquals(3, bifunc.apply("abcdefghi", "def").intValue());
     assertEquals(-1, bifunc.apply("abcdefghi", "xyz").intValue());
@@ -308,12 +308,12 @@ public class A_LambdaTest {
    * StringBuilder).
    */
   @Test
-  @Disabled
+  // @Disabled
   public void f_runnable1() {
     StringBuilder sb = new StringBuilder("abc");
     String suffix = "xyz";
 
-    Runnable r = null; // TODO
+    Runnable r = ()-> sb.append(suffix); // TODO
 
     r.run();
     r.run();
@@ -326,9 +326,9 @@ public class A_LambdaTest {
    * into the string "abcdefghij", or that returns -1 if the string argument doesn't occur.
    */
   @Test
-  @Disabled
+  // @Disabled
   public void g_boundMethodRef1() {
-    Function<String, Integer> func = null; // TODO
+    Function<String, Integer> func = x-> "abcdefghij".indexOf(x); // TODO
 
     assertEquals(2, func.apply("cde").intValue());
     assertEquals(4, func.apply("efg").intValue());
@@ -352,9 +352,9 @@ public class A_LambdaTest {
    * side of the :: operator.
    */
   @Test
-  @Disabled
+  // @Disabled
   public void g_boundMethodRef2() {
-    Function<String, Integer> func = null; // TODO
+    Function<String, Integer> func = "abcdefghij"::indexOf; // TODO
 
     assertEquals(2, func.apply("cde").intValue());
     assertEquals(4, func.apply("efg").intValue());
